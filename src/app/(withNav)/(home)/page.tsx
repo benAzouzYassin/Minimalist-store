@@ -1,0 +1,82 @@
+import { apiBase } from "@/lib/axios";
+import Hero from "./_componentts/Hero";
+import TopProducts from "./_componentts/TopProducts";
+import Link from "next/link";
+import Image from "next/image";
+import Trending from "./_componentts/Trending";
+
+export default async function Home() {
+  const topProducts = await apiBase.get("/products/top");
+  const trendingProducts = await apiBase.get("/products/trending");
+  return (
+    <section className="px-[150px] pb-28 pt-10">
+      <Hero />
+      <TopProducts products={topProducts.data} />
+      <section className="grid  overflow-hidden h-[350px] bg-[#E9E9E9] rounded mt-20 grid-cols-2">
+        <div className="p-20">
+          <h2 className="text-3xl font-bold ">Creative harmonious living</h2>
+          <p className="text-lg   text-black/90 mt-2">
+            Our Products are all made to standard sizes so that you can mix and
+            match them freely.
+          </p>
+          <Link
+            href={"/products"}
+            className=" bg-black block w-fit text-white font-medium rounded border px-5 mt-3 py-3"
+          >
+            Shop now
+          </Link>
+        </div>
+        <Image
+          alt=""
+          src={"/assets/banner1.png"}
+          width={600}
+          height={600}
+          className="w-full h-full object-center object-contain"
+        />
+      </section>
+      <Trending products={trendingProducts.data} />
+      <section className="grid  overflow-hidden h-[350px] bg-[#E9E9E9] rounded mt-20 grid-cols-2">
+        <Image
+          alt=""
+          src={"/assets/banner2.png"}
+          width={600}
+          height={600}
+          className="w-full h-full object-center object-contain"
+        />
+
+        <div className="p-20">
+          <h2 className="text-3xl font-bold ">Comfortable & Elegant Living</h2>
+          <p className="text-lg   text-black/90 mt-2">
+            Our Products are all made to standard sizes so that you can mix and
+            match them freely.
+          </p>
+          <Link
+            href={"/products"}
+            className=" bg-black block w-fit text-white font-medium rounded border px-5 mt-3 py-3"
+          >
+            Shop now
+          </Link>
+        </div>
+      </section>
+    </section>
+  );
+}
+export type Product = {
+  id: number;
+  name: string;
+  imageURL: string;
+  price: string;
+  otherImages: string[];
+  description?: string;
+  isSoldOut?: boolean;
+  isPublished?: boolean;
+  colors?: string[];
+  brandName?: string;
+  reference?: string;
+  createdAt: string;
+  updatedAt: string;
+  promotion?: any;
+  details?: { value: string; name: string }[];
+};
+
+// TODO make the hero better
