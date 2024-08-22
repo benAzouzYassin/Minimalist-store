@@ -15,20 +15,17 @@ type Props = {
 export default function ProductImages(props: Props) {
     const images = [props.mainImage, ...props.otherImages];
     return (
-        <Carousel
-            carouselOptions={{
-                loop: true,
-            }}>
+        <Carousel>
             {images.length > 1 && (
                 <>
                     <CarouselNext className="top-1/3 -translate-y-1/3" />
                     <CarouselPrevious className="top-1/3 -translate-y-1/3" />
                 </>
             )}
-            <CarouselMainContainer className="h-[350px]">
+            <CarouselMainContainer className="  h-[350px]">
                 {images.map((src, index) => (
-                    <SliderMainItem key={index} className="bg-transparent">
-                        <div className="outline outline-1 outline-border size-full flex items-center justify-center rounded-xl bg-background">
+                    <SliderMainItem key={index} className="bg-transparent ">
+                        <div className="outline outline-1 !w-[530px] outline-border size-full flex items-center justify-center rounded-xl bg-background">
                             <img
                                 alt=""
                                 src={src}
@@ -43,7 +40,8 @@ export default function ProductImages(props: Props) {
                     <SliderThumbItem
                         key={index}
                         index={index}
-                        className="  h-[160px]">
+                        className="  h-[160px]"
+                    >
                         <div className="  h-[150px] p-2 outline outline-1 outline-border  size-full flex items-center justify-center rounded-xl bg-background">
                             <img
                                 alt=""
