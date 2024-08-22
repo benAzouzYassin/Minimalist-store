@@ -64,8 +64,8 @@ export default function Page() {
     }, [allProducts, selectedCategory, searchQuery]);
 
     return (
-        <section className="pt-10 px-[150px] pb-10 relative min-h-screen">
-            <div className="flex items-center ">
+        <section className="pt-10 flex flex-col pb-10 relative min-h-screen">
+            <div className="flex w-[1220px] mx-auto items-center ">
                 <div className="relative w-[350px]">
                     <Input
                         type="text"
@@ -99,15 +99,18 @@ export default function Page() {
                 </Select>
             </div>
             <section className="flex gap-4 mt-5">
-                <section className="flex-grow gap-y-5 gap-x-6 grid grid-cols-4">
+                <section className="gap-y-5 gap-x-6 mx-auto !w-[1220px]  grid grid-cols-4 justify-center">
                     {isLoading &&
                         Array.from({ length: 20 }).map((_, i) => (
-                            <ProductCardSkeleton className="w-full" key={i} />
+                            <ProductCardSkeleton
+                                className="w-[290px]"
+                                key={i}
+                            />
                         ))}
 
                     {visibleProducts.map((p) => (
                         <ProductCard
-                            className={cn("w-full")}
+                            className={cn("w-[290px]")}
                             key={p.id}
                             id={p.id}
                             image={p.imageURL}

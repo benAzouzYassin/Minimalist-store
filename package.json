@@ -12,6 +12,7 @@
     "@mantine/carousel": "^7.12.1",
     "@mantine/core": "^7.12.1",
     "@mantine/hooks": "^7.12.1",
+    "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slider": "^1.2.0",

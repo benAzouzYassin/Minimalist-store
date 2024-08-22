@@ -25,7 +25,7 @@ export default function ProductImages(props: Props) {
             <CarouselMainContainer className="  h-[350px]">
                 {images.map((src, index) => (
                     <SliderMainItem key={index} className="bg-transparent ">
-                        <div className="outline outline-1 !w-[530px] outline-border size-full flex items-center justify-center rounded-xl bg-background">
+                        <div className="outline outline-1 !w-[550px] outline-border size-full flex items-center justify-center rounded-xl bg-background">
                             <img
                                 alt=""
                                 src={src}

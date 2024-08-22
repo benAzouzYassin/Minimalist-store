@@ -1,12 +1,5 @@
-import {
-    Ankr,
-    BagHappy,
-    Box1,
-    Car,
-    I3DCubeScan,
-    ShoppingCart,
-} from "iconsax-react";
 import Link from "next/link";
+import Cart from "../cart/Cart";
 
 export default function Nav() {
     return (
@@ -34,7 +27,7 @@ export default function Nav() {
                     </Link>
                 </li>
                 <li>
-                    <CartIcon />
+                    <Cart />
                 </li>
             </ul>
         </nav>
@@ -43,18 +36,5 @@ export default function Nav() {
 function Logo() {
     return (
         <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[#B6002C]"></div>
-    );
-}
-function CartIcon() {
-    return (
-        <svg
-            className="active:scale-95 transition-transform hover:cursor-pointer"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="26"
-            height="26">
-            <path fill="none" d="M0 0h24v24H0z"></path>
-            <path d="M4 16V4H2V2h3a1 1 0 0 1 1 1v12h12.438l2-8H8V5h13.72a1 1 0 0 1 .97 1.243l-2.5 10a1 1 0 0 1-.97.757H5a1 1 0 0 1-1-1zm2 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm12 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"></path>
-        </svg>
     );
 }
