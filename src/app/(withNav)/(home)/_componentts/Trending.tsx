@@ -4,11 +4,31 @@ import "@mantine/carousel/styles.css";
 import { Product } from "../page";
 import ProductCard from "@/components/shared/ProductCard";
 import { ArrowLeft, ArrowRight } from "iconsax-react";
+import { useEffect, useState } from "react";
+import { apiBase } from "@/lib/axios";
+import TrendingProductsLoading from "./loading/TrendingProductsLoading";
 
 type Props = {
     products: Product[];
 };
-export default function Trending({ products }: Props) {
+export default function Trending() {
+    const [products, setProducts] = useState<Product[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        apiBase
+            .get("/products/trending")
+            .then(({ data }) => {
+                setProducts(data);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+            .finally(() => setIsLoading(false));
+    }, []);
+    if (isLoading) {
+        return <TrendingProductsLoading />;
+    }
     return (
         <>
             <h2 className="font-semibold mt-20 text-4xl font-mono">
@@ -30,7 +50,8 @@ export default function Trending({ products }: Props) {
                 }}
                 nextControlIcon={<ArrowRight className="p-1" />}
                 previousControlIcon={<ArrowLeft className="p-1" />}
-                dragFree>
+                dragFree
+            >
                 {products.map((product) => (
                     <Carousel.Slide key={product.id}>
                         <ProductCard

@@ -81,7 +81,8 @@ export default function Page() {
                         setSelectedCategory(val);
                         router.replace(`/products/?category=${val}`);
                     }}
-                    value={selectedCategory}>
+                    value={selectedCategory}
+                >
                     <SelectTrigger className="w-[300px] ml-auto">
                         {selectedCategory.toUpperCase()}
                     </SelectTrigger>
