@@ -11,6 +11,7 @@ import {
 import CartItem from "./CartItem";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/global-stores/cartStore"; // Adjust the import path as necessary
+import Link from "next/link";
 
 export default function Cart() {
     const { products, isOpen, setIsOpen } = useCartStore();
@@ -55,20 +56,24 @@ export default function Cart() {
                                 </div>
                             )}
                         </div>
-                        {products.length > 1 && (
-                            <div className="h-[155px] relative">
-                                <div className="flex mt-2 items-center">
+                        {products.length > 0 && (
+                            <div className="h-[158px] relative">
+                                <div className="flex mt-2 pb-1 items-center">
                                     <span className="text-lg font-medium">
                                         Subtotal
                                     </span>
-                                    <span className="font-bold ml-auto">
+                                    <span className="font-bold  ml-auto">
                                         {subtotal.toFixed(2)}$
                                     </span>
                                 </div>
-
-                                <Button className="w-full active:scale-95 transition-all hover:bg-white hover:text-black border-black border-2 rounded mt-1">
-                                    Go to checkout
-                                </Button>
+                                <Link
+                                    href={"/checkout"}
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    <Button className="w-full active:scale-95 transition-all hover:bg-white hover:text-black border-black border-2 rounded mt-1">
+                                        Go to checkout
+                                    </Button>
+                                </Link>
                             </div>
                         )}
                     </div>

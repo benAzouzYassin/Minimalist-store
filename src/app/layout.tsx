@@ -27,7 +27,7 @@ export default function RootLayout({
             <head>
                 <ColorSchemeScript />
             </head>
-            <body className={cn("min-w-[100vw] font-sans", poppins.className)}>
+            <body className={cn("min-w-[100vw]", poppins.className)}>
                 <MantineProvider>{children}</MantineProvider>
                 <Footer />
             </body>
