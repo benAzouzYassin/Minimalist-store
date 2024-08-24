@@ -18,7 +18,8 @@ export default async function Page({ params }: Props) {
                         return (
                             <div
                                 key={item.name}
-                                className="min-h-[200px]  flex items-center flex-col justify-center border rounded-lg">
+                                className="min-h-[200px]  flex items-center flex-col justify-center border rounded-lg"
+                            >
                                 <p className="text-xl font-semibold  ">
                                     {item.name}
                                 </p>
@@ -57,7 +58,11 @@ export type Product = {
     reference?: string;
     createdAt: string;
     updatedAt: string;
-    promotion?: any;
+    promotion?: {
+        isDiscounted: boolean;
+        discountPercentage: string;
+        discountedPrice: number;
+    };
     details?: { value: string; name: string }[];
     isTop: boolean;
     isTrending: boolean;

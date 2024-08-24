@@ -1,8 +1,12 @@
 import { Minus, Plus, X } from "lucide-react";
-import { useCartStore } from "@/global-stores/cartStore"; // Adjust the import path as necessary
-
+import { useCartStore } from "@/global-stores/cartStore";
 type CartItemProps = {
     product: {
+        promotion?: {
+            isDiscounted: boolean;
+            discountPercentage: string;
+            discountedPrice: number;
+        };
         id: number;
         name: string;
         price: number;
@@ -44,11 +48,11 @@ export default function CartItem({ product }: CartItemProps) {
                     backgroundPosition: "center",
                 }}
             ></div>
-            <div className="flex-grow ml-2">
+            <div className="flex-grow ml-2 flex flex-col">
                 <p className=" line-clamp-2 font-semibold pr-4">
                     {product.name}
                 </p>
-                <div className="w-[90px] mt-4 grid grid-cols-3">
+                <div className="w-[90px]   mt-auto grid grid-cols-3">
                     <button
                         className="h-7 active:scale-95 transition-all bg-black flex items-center justify-center text-white text-xl font-semibold rounded"
                         onClick={handleDecreaseQuantity}
@@ -72,9 +76,23 @@ export default function CartItem({ product }: CartItemProps) {
                     <X className="w-4 stroke-[2.4] h-4" />
                 </button>
             </div>
-            <p className="absolute right-3 bottom-3 font-semibold">
-                {(product.price * product.quantity).toFixed(2)}$
-            </p>
+            {product.promotion?.isDiscounted ? (
+                <div className="absolute right-3 flex items-center gap-2 bottom-3">
+                    <p className=" font-semibold opacity-50 scale-95 mt-px line-through">
+                        {(product.price * product.quantity).toFixed(2)}
+                    </p>
+                    <p className=" font-semibold text-red-600">
+                        {(
+                            product.promotion.discountedPrice * product.quantity
+                        ).toFixed(2)}
+                        $
+                    </p>
+                </div>
+            ) : (
+                <p className="absolute right-3 bottom-3 font-semibold">
+                    {(product.price * product.quantity).toFixed(2)}$
+                </p>
+            )}
         </div>
     );
 }

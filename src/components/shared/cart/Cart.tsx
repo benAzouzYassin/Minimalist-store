@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import CartItem from "./CartItem";
 import { Button } from "@/components/ui/button";
-import { useCartStore } from "@/global-stores/cartStore"; // Adjust the import path as necessary
+import { useCartStore } from "@/global-stores/cartStore";
 import Link from "next/link";
 
 export default function Cart() {

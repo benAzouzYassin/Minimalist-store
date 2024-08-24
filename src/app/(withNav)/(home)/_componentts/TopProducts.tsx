@@ -14,6 +14,7 @@ export default async function TopProducts() {
                 {topProducts?.map((product) => (
                     <ProductCard
                         className=" w-[290px]"
+                        promotion={product.promotion}
                         key={product.id}
                         id={product.id}
                         price={product.price as any}

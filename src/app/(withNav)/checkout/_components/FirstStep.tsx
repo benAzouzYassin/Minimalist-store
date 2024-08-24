@@ -16,10 +16,16 @@ export default function FirstStep(props: Props) {
 
     useEffect(() => {
         const calculateSubtotal = () => {
-            const total = products.reduce(
-                (acc, product) => acc + product.price * product.quantity,
-                0
-            );
+            const total = products.reduce((acc, product) => {
+                if (product.promotion?.isDiscounted) {
+                    return (
+                        acc +
+                        product.promotion.discountedPrice * product.quantity
+                    );
+                } else {
+                    return acc + product.price * product.quantity;
+                }
+            }, 0);
             setSubtotal(total);
         };
 
@@ -112,7 +118,21 @@ function ProductsTable() {
                             <span className="line-clamp-2">{product.name}</span>
                         </td>
                         <td className="py-3 px-3 text-center">
-                            ${Number(product.price).toFixed(2)}
+                            {product.promotion?.isDiscounted ? (
+                                <div>
+                                    <p className="line-through opacity-50">
+                                        ${Number(product.price).toFixed(2)}
+                                    </p>
+                                    <p className=" text-red-500">
+                                        $
+                                        {Number(
+                                            product.promotion.discountedPrice
+                                        ).toFixed(2)}
+                                    </p>
+                                </div>
+                            ) : (
+                                <p> ${Number(product.price).toFixed(2)}</p>
+                            )}
                         </td>
                         <td className="py-3 px-2 text-center">
                             <div className="flex justify-center items-center">
@@ -136,7 +156,30 @@ function ProductsTable() {
                             </div>
                         </td>
                         <td className="py-3 px-2 text-center">
-                            ${(product.price * product.quantity).toFixed(2)}
+                            {product.promotion?.isDiscounted ? (
+                                <div>
+                                    <p className="line-through opacity-50">
+                                        $
+                                        {(
+                                            product.price * product.quantity
+                                        ).toFixed(2)}
+                                    </p>
+                                    <p className=" text-red-500">
+                                        $
+                                        {(
+                                            product.promotion.discountedPrice *
+                                            product.quantity
+                                        ).toFixed(2)}
+                                    </p>
+                                </div>
+                            ) : (
+                                <p>
+                                    $
+                                    {(product.price * product.quantity).toFixed(
+                                        2
+                                    )}
+                                </p>
+                            )}
                         </td>
                         <td className="py-3 px-2 text-center">
                             <button

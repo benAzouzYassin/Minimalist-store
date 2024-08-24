@@ -6,7 +6,7 @@ import { Heart } from "iconsax-react";
 import { Minus, Plus } from "lucide-react";
 import { Product } from "../page";
 import ProductImages from "./ProductImages";
-import { useCartStore } from "@/global-stores/cartStore"; // Adjust the import path as necessary
+import { useCartStore } from "@/global-stores/cartStore";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -31,6 +31,7 @@ export default function MainDetails({ product }: Props) {
             updatedProducts[existingProductIndex].quantity += quantity;
         } else {
             updatedProducts.push({
+                promotion: product.promotion,
                 id: product.id,
                 image: product.imageURL,
                 name: product.name,
@@ -70,8 +71,13 @@ export default function MainDetails({ product }: Props) {
                 />
             </div>
 
-            <div className="bg-neutral-100 max-w-[650px] rounded-2xl pt-5 px-8">
-                <h1 className="text-3xl font-bold line-clamp-2">
+            <div className="bg-neutral-100 relative max-w-[650px] rounded-2xl pt-5 px-8">
+                {product.promotion?.isDiscounted && (
+                    <span className="bg-red-600/90 flex items-center justify-center z-50 text-sm font-semibold top-14  right-0 px-2 py-[7px]  rounded-r-none rounded-l-md text-white absolute">
+                        SAVE {product.promotion.discountPercentage}
+                    </span>
+                )}
+                <h1 className="text-3xl font-bold max-w-[90%] line-clamp-2">
                     {product.name}
                 </h1>
                 <p className="font-medium text-sm opacity-50">
@@ -86,9 +92,23 @@ export default function MainDetails({ product }: Props) {
                         In stock
                     </div>
                 )}
-                <p className="text-[28px] mt-3 mb-1 font-bold opacity-90 ">
-                    {Number(product.price).toFixed(2)}$
-                </p>
+                {product.promotion?.isDiscounted ? (
+                    <div className="flex items-center gap-3">
+                        <p className="text-[28px] mt-3 line-through opacity-40 mb-1 font-semibold ">
+                            {Number(product.price).toFixed(2)}
+                        </p>
+                        <p className="text-[28px] text-red-600 mt-3 mb-1 font-bold  ">
+                            {Number(
+                                product?.promotion?.discountedPrice
+                            ).toFixed(2)}
+                            $
+                        </p>
+                    </div>
+                ) : (
+                    <p className="text-[28px] mt-3 mb-1 font-bold opacity-90 ">
+                        {Number(product.price).toFixed(2)}$
+                    </p>
+                )}
                 <p className="text-black/60 font-medium mt-2 ">
                     The rounded square design of the toaster allows it to fit
                     neatly against a wall, or inside a corner. Excellent at

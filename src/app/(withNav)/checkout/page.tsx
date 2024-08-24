@@ -16,10 +16,16 @@ export default function Page() {
 
     useEffect(() => {
         const calculateSubtotal = () => {
-            const total = products.reduce(
-                (acc, product) => acc + product.price * product.quantity,
-                0
-            );
+            const total = products.reduce((acc, product) => {
+                if (product.promotion?.isDiscounted) {
+                    return (
+                        acc +
+                        product.promotion.discountedPrice * product.quantity
+                    );
+                } else {
+                    return acc + product.price * product.quantity;
+                }
+            }, 0);
             setSubtotal(total);
         };
 

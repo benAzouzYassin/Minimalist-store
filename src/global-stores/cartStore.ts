@@ -7,6 +7,11 @@ type Product = {
     price: number;
     quantity: number;
     image: string;
+    promotion?: {
+        isDiscounted: boolean;
+        discountPercentage: string;
+        discountedPrice: number;
+    };
 };
 
 type State = {

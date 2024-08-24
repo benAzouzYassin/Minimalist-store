@@ -84,8 +84,10 @@ export type Product = {
     reference?: string;
     createdAt: string;
     updatedAt: string;
-    promotion?: any;
     details?: { value: string; name: string }[];
+    promotion?: {
+        isDiscounted: boolean;
+        discountPercentage: string;
+        discountedPrice: number;
+    };
 };
-
-// TODO make the hero better

@@ -56,6 +56,7 @@ export default function Trending() {
                     <Carousel.Slide key={product.id}>
                         <ProductCard
                             className="w-auto shadow-[0px_0px_10px] shadow-black/10"
+                            promotion={product.promotion}
                             key={product.id}
                             id={product.id}
                             price={product.price as any}

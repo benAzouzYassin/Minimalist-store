@@ -83,10 +83,10 @@ export default function Page() {
                     }}
                     value={selectedCategory}
                 >
-                    <SelectTrigger className="w-[300px] ml-auto">
+                    <SelectTrigger className="w-[300px] font-medium ml-auto">
                         {selectedCategory.toUpperCase()}
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="font-medium">
                         <SelectItem value={"ALL CATEGORIES"}>
                             ALL CATEGORIES
                         </SelectItem>
@@ -111,6 +111,7 @@ export default function Page() {
                     {visibleProducts.map((p) => (
                         <ProductCard
                             className={cn("w-[290px]")}
+                            promotion={p.promotion}
                             key={p.id}
                             id={p.id}
                             image={p.imageURL}

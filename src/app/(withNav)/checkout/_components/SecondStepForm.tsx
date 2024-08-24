@@ -1,10 +1,11 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import LoadingButton from "@/components/shared/LoadingButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { apiBase } from "@/lib/axios";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 interface FormValues {
     name: string;
@@ -16,6 +17,7 @@ interface FormValues {
 export default function SecondStepForm() {
     const [phone, setPhone] = useState("");
     const [phoneErr, setPhoneErr] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const {
         register,
         handleSubmit,
@@ -27,9 +29,14 @@ export default function SecondStepForm() {
             return setPhoneErr("Phone is required.");
         } else {
             console.log({ ...data, phone });
+            apiBase
+                .post("/api/orders/create", { ...data, phone })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => console.error(err));
+            setIsLoading(true);
         }
-
-        // Handle form submission logic here
     };
 
     return (
@@ -156,12 +163,13 @@ export default function SecondStepForm() {
                     {errors.zipcode?.message}
                 </p>
             </div>
-            <Button
-                type="submit"
-                className="mt-4  active:scale-[98%] transition-all w-full h-[50px] bg-neutral-800 text-white font-bold rounded"
+            <LoadingButton
+                isLoading={isLoading}
+                // type="submit"
+                className="mt-4 text-white  active:scale-[98%] transition-all w-full h-[50px] bg-neutral-800  font-bold rounded"
             >
-                Complete the order
-            </Button>
+                Finish the order
+            </LoadingButton>
         </form>
     );
 }
