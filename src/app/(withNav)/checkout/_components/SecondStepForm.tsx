@@ -2,6 +2,7 @@ import LoadingButton from "@/components/shared/LoadingButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PhoneInput } from "@/components/ui/phone-input";
+import { useCartStore } from "@/global-stores/cartStore";
 import { apiBase } from "@/lib/axios";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -18,6 +19,7 @@ export default function SecondStepForm() {
     const [phone, setPhone] = useState("");
     const [phoneErr, setPhoneErr] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const products = useCartStore((s) => s.products);
     const {
         register,
         handleSubmit,
@@ -28,9 +30,14 @@ export default function SecondStepForm() {
         if (!phone) {
             return setPhoneErr("Phone is required.");
         } else {
-            console.log({ ...data, phone });
+            const payload = {
+                ...data,
+                phone,
+                productsIds: products?.map((p) => p.id),
+            };
+            console.log(payload);
             apiBase
-                .post("/api/orders/create", { ...data, phone })
+                .post("/api/orders/create", payload)
                 .then((res) => {
                     console.log(res);
                 })
