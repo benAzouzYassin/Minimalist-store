@@ -33,7 +33,10 @@ export default function SecondStepForm() {
             const payload = {
                 ...data,
                 phone,
-                productsIds: products?.map((p) => p.id),
+                products: products?.map((p) => ({
+                    id: p.id,
+                    quantity: p.quantity,
+                })),
             };
             console.log(payload);
             apiBase
