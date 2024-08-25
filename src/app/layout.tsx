@@ -6,6 +6,7 @@ import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Poppins } from "next/font/google";
 import Footer from "@/components/shared/footer";
 import { cn } from "@/lib/utils";
+export const dynamic = "force-dynamic";
 
 const poppins = Poppins({
     subsets: ["latin"],
