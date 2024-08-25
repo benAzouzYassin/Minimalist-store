@@ -40,7 +40,7 @@ export default function SecondStepForm() {
             };
             console.log(payload);
             apiBase
-                .post("/api/orders/create", payload)
+                .post("/orders/create", payload)
                 .then((res) => {
                     console.log(res);
                 })
