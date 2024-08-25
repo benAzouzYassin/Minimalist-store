@@ -1,9 +1,15 @@
 "use client";
 import ProductCard from "@/components/shared/ProductCard";
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel";
+
 import { apiBase } from "@/lib/axios";
-import { Carousel } from "@mantine/carousel";
-import "@mantine/carousel/styles.css";
-import { ArrowLeft, ArrowRight } from "iconsax-react";
+import { populateIsDiscounted } from "@/utils/productPromotion";
 import { useEffect, useState } from "react";
 
 export default function SimilarProducts({
@@ -22,16 +28,15 @@ export default function SimilarProducts({
 
             for (const c of categoriesIds) {
                 try {
-                    // TODO bring back this endpoint
                     const res = await apiBase.get(
                         `/products/filter/byCategory/${c}`
                     );
                     const fetchedProducts = res.data || [];
 
-                    fetchedProducts.forEach((item: SimilarProductType) => {
-                        if (!productSet.has(item.product.id)) {
-                            productSet.add(item.product.id);
-                            products.push(item);
+                    fetchedProducts.forEach((product: SimilarProductType) => {
+                        if (!productSet.has(product.id)) {
+                            productSet.add(product.id);
+                            products.push(populateIsDiscounted(product));
                         }
                     });
                 } catch (err) {
@@ -47,66 +52,65 @@ export default function SimilarProducts({
     if (!similarProducts || similarProducts.length < 3) {
         return null;
     }
-
     return (
         <section className="w-full px-[150px] ">
             <h2 className="font-semibold mt-20 text-4xl font-mono">
                 Similar Products
             </h2>
-
             <Carousel
-                className="mt-5"
-                height={350}
-                slideSize={{ base: "100%", sm: "50%", md: "320px" }}
-                slideGap={{ base: 0, sm: "md" }}
-                loop
-                align="start"
-                nextControlProps={{
-                    style: { transform: "scale(125%)" },
+                opts={{
+                    loop: true,
+                    dragFree: true,
                 }}
-                previousControlProps={{
-                    style: { transform: "scale(125%)" },
-                }}
-                nextControlIcon={<ArrowRight className="p-1" />}
-                previousControlIcon={<ArrowLeft className="p-1" />}
-                dragFree
             >
-                {similarProducts.map(({ product }) => (
-                    <Carousel.Slide key={product?.id}>
-                        <ProductCard
-                            className="w-auto shadow-[0px_0px_10px] shadow-black/10"
-                            id={product?.id}
-                            price={product?.price as any}
-                            image={product?.imageURL}
-                            isSoldOut={!!product.isSoldOut}
-                            name={product.name}
-                        />
-                    </Carousel.Slide>
-                ))}
+                <CarouselContent>
+                    {similarProducts.map((product) => (
+                        <CarouselItem
+                            key={product.id}
+                            className="md:basis-1/2 lg:basis-[300px]"
+                        >
+                            <ProductCard
+                                className="w-auto shadow-[0px_0px_10px] shadow-black/10"
+                                id={product?.id}
+                                price={product?.price as any}
+                                image={product?.imageURL}
+                                isSoldOut={!!product.isSoldOut}
+                                name={product.name}
+                            />
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
             </Carousel>
         </section>
     );
 }
 export type SimilarProductType = {
-    productsToCategory: {
-        productId: number;
-        categoryId: number;
+    id: number;
+    name: string;
+    imageURL: string;
+    price: string;
+    otherImages: string[];
+    description: string;
+    isSoldOut: boolean;
+    isPublished: boolean;
+    colors: string[];
+    brandName: string;
+    reference: string;
+    createdAt: string;
+    updatedAt: string;
+    promotion: {
+        endDate: string;
+        startDate: string;
+        discountPercentage: string;
+        discountedPrice: string;
     };
-    product: {
-        id: number;
+    details: {
+        index: number;
         name: string;
-        imageURL: string;
-        price: string;
-        otherImages: string[];
-        description: string;
-        isSoldOut: boolean;
-        isPublished: boolean;
-        colors: string[];
-        brandName: string;
-        reference: string;
-        createdAt: string;
-        updatedAt: string;
-        promotion: any | null;
-        details: { index: number; name: string; value: string }[];
+        value: string;
     };
+    isTop: boolean;
+    isTrending: boolean;
 };

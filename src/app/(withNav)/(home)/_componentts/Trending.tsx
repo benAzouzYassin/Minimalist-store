@@ -1,16 +1,21 @@
 "use client";
-import { Carousel } from "@mantine/carousel";
-import "@mantine/carousel/styles.css";
+
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel";
+
 import { Product } from "../page";
 import ProductCard from "@/components/shared/ProductCard";
 import { ArrowLeft, ArrowRight } from "iconsax-react";
 import { useEffect, useState } from "react";
 import { apiBase } from "@/lib/axios";
 import TrendingProductsLoading from "./loading/TrendingProductsLoading";
+import { populateIsDiscounted } from "@/utils/productPromotion";
 
-type Props = {
-    products: Product[];
-};
 export default function Trending() {
     const [products, setProducts] = useState<Product[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +24,7 @@ export default function Trending() {
         apiBase
             .get("/products/trending")
             .then(({ data }) => {
-                setProducts(data);
+                setProducts(populateIsDiscounted(data));
             })
             .catch((err) => {
                 console.error(err);
@@ -36,36 +41,32 @@ export default function Trending() {
             </h2>
 
             <Carousel
-                className="mt-5"
-                height={350}
-                slideSize={{ base: "100%", sm: "50%", md: "320px" }}
-                slideGap={{ base: 0, sm: "md" }}
-                loop
-                align="start"
-                nextControlProps={{
-                    style: { transform: "scale(125%)" },
+                opts={{
+                    loop: true,
+                    dragFree: true,
                 }}
-                previousControlProps={{
-                    style: { transform: "scale(125%)" },
-                }}
-                nextControlIcon={<ArrowRight className="p-1" />}
-                previousControlIcon={<ArrowLeft className="p-1" />}
-                dragFree
             >
-                {products.map((product) => (
-                    <Carousel.Slide key={product.id}>
-                        <ProductCard
-                            className="w-auto shadow-[0px_0px_10px] shadow-black/10"
-                            promotion={product.promotion}
+                <CarouselContent>
+                    {products.map((product) => (
+                        <CarouselItem
                             key={product.id}
-                            id={product.id}
-                            price={product.price as any}
-                            image={product.imageURL}
-                            isSoldOut={!!product.isSoldOut}
-                            name={product.name}
-                        />
-                    </Carousel.Slide>
-                ))}
+                            className="md:basis-1/2 lg:basis-[300px]"
+                        >
+                            <ProductCard
+                                className="w-auto shadow-[0px_0px_10px] shadow-black/10"
+                                promotion={product.promotion}
+                                key={product.id}
+                                id={product.id}
+                                price={product.price as any}
+                                image={product.imageURL}
+                                isSoldOut={!!product.isSoldOut}
+                                name={product.name}
+                            />
+                        </CarouselItem>
+                    ))}{" "}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
             </Carousel>
         </>
     );

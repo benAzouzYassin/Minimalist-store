@@ -4,9 +4,9 @@ import Cart from "../cart/Cart";
 export default function Nav() {
     return (
         <nav className="bg-white h-[var(---nav-height)] z-[60] flex items-center px-[150px]  shadow  w-full fixed top-0 left-0">
-            <Link href={"/"}>
+            {/* <Link href={"/"}>
                 <Logo />
-            </Link>
+            </Link> */}
             <ul className="ml-auto flex items-center  text-[20px] gap-8 font-mono ">
                 <li className="active:scale-95 transition-transform">
                     <Link className="group relative  " href={"/products"}>

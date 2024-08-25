@@ -5,31 +5,38 @@ import { PhoneInput } from "@/components/ui/phone-input";
 import { useCartStore } from "@/global-stores/cartStore";
 import { apiBase } from "@/lib/axios";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-interface FormValues {
+type FormValues = {
     name: string;
     prename?: string;
     address: string;
     zipcode: string;
-}
+};
+type Props = {
+    handleFailure: () => void;
+};
 
-export default function SecondStepForm() {
+export default function SecondStepForm(props: Props) {
     const [phone, setPhone] = useState("");
     const [phoneErr, setPhoneErr] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const products = useCartStore((s) => s.products);
+    const setProducts = useCartStore((s) => s.setProducts);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<FormValues>();
-
+    const router = useRouter();
     const onSubmit: SubmitHandler<FormValues> = (data) => {
         if (!phone) {
             return setPhoneErr("Phone is required.");
         } else {
+            setIsLoading(true);
             const payload = {
                 ...data,
                 phone,
@@ -38,14 +45,15 @@ export default function SecondStepForm() {
                     quantity: p.quantity,
                 })),
             };
-            console.log(payload);
             apiBase
                 .post("/orders/create", payload)
-                .then((res) => {
-                    console.log(res);
+                .then(() => {
+                    router.replace("/checkout/success");
                 })
-                .catch((err) => console.error(err));
-            setIsLoading(true);
+                .catch((err) => {
+                    console.error(err);
+                    props.handleFailure();
+                });
         }
     };
 

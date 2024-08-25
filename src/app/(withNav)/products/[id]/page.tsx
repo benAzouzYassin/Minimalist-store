@@ -2,6 +2,7 @@ import NotFoundPage from "@/app/not-found";
 import { apiBase } from "@/lib/axios";
 import MainDetails from "./_components/MainDetails";
 import SimilarProducts from "./_components/SimilarProducts";
+import { populateIsDiscounted } from "@/utils/productPromotion";
 
 type Props = {
     params: { id: string };
@@ -10,11 +11,12 @@ type Props = {
 export default async function Page({ params }: Props) {
     try {
         const { data } = await apiBase.get(`/products/${params.id}`);
+        const product = populateIsDiscounted(data);
         return (
             <section className="min-h-screen pb-20">
-                <MainDetails product={data} />
+                <MainDetails product={product} />
                 <div className="grid grid-cols-4 px-[150px] mt-10 gap-5">
-                    {data?.details?.map((item: any) => {
+                    {product?.details?.map((item: any) => {
                         return (
                             <div
                                 key={item.name}
@@ -32,7 +34,7 @@ export default async function Page({ params }: Props) {
                 </div>
                 <SimilarProducts
                     categoriesIds={
-                        data?.categories?.map(
+                        product?.categories?.map(
                             (item: any) => item?.categoryId
                         ) ?? []
                     }

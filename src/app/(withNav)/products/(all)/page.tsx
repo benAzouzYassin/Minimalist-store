@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { apiBase } from "@/lib/axios";
 import { cn } from "@/lib/utils";
+import { populateIsDiscounted } from "@/utils/productPromotion";
 import { Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -32,7 +33,7 @@ export default function Page() {
     useEffect(() => {
         apiBase
             .get("/products")
-            .then(({ data }) => setAllProducts(data))
+            .then(({ data }) => setAllProducts(populateIsDiscounted(data)))
             .catch((err) => console.error(err))
             .finally(() => setIsLoading(false));
         apiBase
@@ -70,7 +71,7 @@ export default function Page() {
                     <Input
                         type="text"
                         placeholder="Search..."
-                        className="pl-9 focus-within:pl-10 transition-all"
+                        className="pl-9 focus-visible:pl-10 transition-all"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />

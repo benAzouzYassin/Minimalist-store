@@ -1,34 +1,18 @@
 "use client";
-import { useCartStore } from "@/global-stores/cartStore";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SecondStepForm from "./SecondStepForm";
+import FailPage from "./FailPage";
 
 export default function SecondStep() {
-    const products = useCartStore((s) => s.products);
-    const [subtotal, setSubtotal] = useState(0);
-    const deliveryFee = 7;
+    const [isFailure, setIsFailure] = useState(false);
 
-    useEffect(() => {
-        const calculateSubtotal = () => {
-            const total = products.reduce((acc, p) => {
-                if (p.promotion?.isDiscounted) {
-                    return acc + p.promotion.discountedPrice * p.quantity;
-                } else {
-                    return acc + p.price * p.quantity;
-                }
-            }, 0);
-            setSubtotal(total);
-        };
-
-        calculateSubtotal();
-    }, [products]);
-
-    const total = subtotal + deliveryFee;
-
+    if (isFailure) {
+        return <FailPage />;
+    }
     return (
         <section className="w-[1200px] pb-20 min-h-[700px]  h-fit mt-10  flex ">
             <div className="flex-grow max-w-[1000px] mx-auto h-fit">
-                <SecondStepForm />
+                <SecondStepForm handleFailure={() => setIsFailure(true)} />
             </div>
         </section>
     );

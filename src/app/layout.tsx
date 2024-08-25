@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import "@mantine/core/styles.css";
 
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { Poppins } from "next/font/google";
 import Footer from "@/components/shared/footer";
 import { cn } from "@/lib/utils";
@@ -25,11 +23,8 @@ export default function RootLayout({
 }>) {
     return (
         <html className="overflow-x-hidden" lang="en">
-            <head>
-                <ColorSchemeScript />
-            </head>
             <body className={cn("min-w-[100vw]", poppins.className)}>
-                <MantineProvider>{children}</MantineProvider>
+                {children}
                 <Footer />
             </body>
         </html>
