@@ -8,6 +8,9 @@ import { Product } from "../page";
 import ProductImages from "./ProductImages";
 import { useCartStore } from "@/global-stores/cartStore";
 import { useRouter } from "next/navigation";
+import { useFavoritesStore } from "@/global-stores/favoritesStore";
+import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 type Props = {
     product: Product;
@@ -15,6 +18,10 @@ type Props = {
 
 export default function MainDetails({ product }: Props) {
     const router = useRouter();
+    const favorites = useFavoritesStore((s) => s.products);
+    const setFavorites = useFavoritesStore((s) => s.setProducts);
+    const isFavoriteProduct = favorites.find((p) => p?.id === product.id);
+
     const {
         products: cartProducts,
         setProducts: setCartProducts,
@@ -147,7 +154,32 @@ export default function MainDetails({ product }: Props) {
                     >
                         Buy now
                     </Button>
-                    <button className="flex rounded-md active:scale-95 transition-all w-[60px] h-[50px] border items-center border-black/40 justify-center">
+                    <button
+                        name="add-to-favorites"
+                        onClick={() => {
+                            if (isFavoriteProduct) {
+                                setFavorites(
+                                    favorites.filter(
+                                        (item) => item.id !== product.id
+                                    )
+                                );
+                                toast.error(
+                                    "Product removed from the favorites list "
+                                );
+                            } else {
+                                toast.info("Product added to favorites list ");
+
+                                setFavorites([...favorites, product]);
+                            }
+                        }}
+                        className={cn(
+                            "flex rounded-md active:scale-95 transition-all w-[60px] h-[50px] border items-center border-black/40 justify-center",
+                            {
+                                "bg-red-400 border-red-500 text-white":
+                                    isFavoriteProduct,
+                            }
+                        )}
+                    >
                         <Heart />
                     </button>
                 </div>

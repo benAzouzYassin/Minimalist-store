@@ -9,19 +9,25 @@ export default function Nav() {
             </Link> */}
             <ul className="ml-auto flex items-center  text-[20px] gap-8 font-mono ">
                 <li className="active:scale-95 transition-transform">
+                    <Link className="group relative  " href={"/"}>
+                        Home
+                        <div className="group-hover:w-[70%] bottom-2 duration-300 ease-out transition-all bg-black h-[2px] w-0" />
+                    </Link>
+                </li>
+                <li className="active:scale-95 transition-transform">
                     <Link className="group relative  " href={"/products"}>
                         Products
                         <div className="group-hover:w-[70%] bottom-2 duration-300 ease-out transition-all bg-black h-[2px] w-0" />
                     </Link>
                 </li>
                 <li className="active:scale-95 transition-transform">
-                    <Link className="group relative  " href={"#"}>
+                    <Link className="group relative  " href={"/promotions"}>
                         Promotions
                         <div className="group-hover:w-[70%] bottom-2 duration-300 ease-out transition-all bg-black h-[2px] w-0" />
                     </Link>
                 </li>
                 <li className="active:scale-95 transition-transform">
-                    <Link className="group relative  " href={"#"}>
+                    <Link className="group relative  " href={"/favorites"}>
                         Favorites
                         <div className="group-hover:w-[70%] bottom-2 duration-300 ease-out transition-all bg-black h-[2px] w-0" />
                     </Link>

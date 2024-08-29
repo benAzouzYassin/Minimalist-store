@@ -25,7 +25,8 @@ export default function SecondStepForm(props: Props) {
     const [isLoading, setIsLoading] = useState(false);
     const products = useCartStore((s) => s.products);
     const setProducts = useCartStore((s) => s.setProducts);
-
+    const coupon = useCartStore((s) => s.coupon);
+    const resetCart = useCartStore((s) => s.reset);
     const {
         register,
         handleSubmit,
@@ -44,10 +45,12 @@ export default function SecondStepForm(props: Props) {
                     id: p.id,
                     quantity: p.quantity,
                 })),
+                couponId: coupon?.id,
             };
             apiBase
                 .post("/orders/create", payload)
                 .then(() => {
+                    resetCart();
                     router.replace("/checkout/success");
                 })
                 .catch((err) => {

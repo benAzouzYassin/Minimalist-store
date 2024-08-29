@@ -4,11 +4,13 @@ import { cn } from "@/lib/utils";
 
 type Props = {
     isLoading: boolean;
+    disabled?: boolean;
 } & HTMLAttributes<HTMLButtonElement>;
 
 export default function LoadingButton({
     isLoading,
     className,
+    disabled,
     ...props
 }: Props) {
     return (
