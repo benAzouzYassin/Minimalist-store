@@ -1,13 +1,38 @@
 import Link from "next/link";
 import Cart from "../cart/Cart";
+import { AlignJustify } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
+import MobileNav from "./MobileNav";
 
 export default function Nav() {
+    const [isFixed, setIsFixed] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setIsFixed(true);
+            } else {
+                setIsFixed(false);
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
-        <nav className="bg-white h-[var(---nav-height)] z-[60] flex items-center px-[150px]  shadow  w-full fixed top-0 left-0">
-            {/* <Link href={"/"}>
-                <Logo />
-            </Link> */}
-            <ul className="ml-auto flex items-center  text-[20px] gap-8 font-mono ">
+        <nav
+            className={cn(
+                "bg-white transition-all shadow h-[80px] sm:h-[var(---nav-height)]  z-[60] flex items-center px-[150px]   fixed  w-full  top-0 left-0",
+                { " h-[60px] sm:!h-[70px]": isFixed }
+            )}
+        >
+            <Cart className="scale-125 absolute top-1/2 -translate-y-1/2 right-[75px] sm:hidden" />
+            <MobileNav />
+            <ul className="ml-auto sm:flex hidden items-center  text-[20px] gap-8 font-mono ">
                 <li className="active:scale-95 transition-transform">
                     <Link className="group relative  " href={"/"}>
                         Home

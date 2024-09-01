@@ -15,6 +15,7 @@ type FormValues = {
     address: string;
     zipcode: string;
 };
+
 type Props = {
     handleFailure: () => void;
 };
@@ -24,7 +25,6 @@ export default function SecondStepForm(props: Props) {
     const [phoneErr, setPhoneErr] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const products = useCartStore((s) => s.products);
-    const setProducts = useCartStore((s) => s.setProducts);
     const coupon = useCartStore((s) => s.coupon);
     const resetCart = useCartStore((s) => s.reset);
     const {
@@ -33,6 +33,7 @@ export default function SecondStepForm(props: Props) {
         formState: { errors },
     } = useForm<FormValues>();
     const router = useRouter();
+
     const onSubmit: SubmitHandler<FormValues> = (data) => {
         if (!phone) {
             return setPhoneErr("Phone is required.");
@@ -61,10 +62,13 @@ export default function SecondStepForm(props: Props) {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="h-fit pr-8 ">
-            <div className="grid grid-cols-2 gap-4">
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="w-full max-w-lg md:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8"
+        >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <Label htmlFor="name" className="text-[16px] block mb-px">
+                    <Label htmlFor="name" className="text-[16px] block mb-1">
                         Name
                         <span className="text-red-500 pt-1 text-lg font-bold">
                             *
@@ -74,12 +78,12 @@ export default function SecondStepForm(props: Props) {
                         id="name"
                         type="text"
                         placeholder="Name"
-                        className="h-[50px] "
+                        className="h-[50px] w-full"
                         {...register("name", { required: "Name is required" })}
                     />
                     <p
                         className={cn(
-                            "text-red-500 font-medium h-5  italic  opacity-0",
+                            "text-red-500 font-medium h-5 italic opacity-0",
                             {
                                 "opacity-100": errors.name?.message,
                             }
@@ -95,7 +99,7 @@ export default function SecondStepForm(props: Props) {
                     <Input
                         id="prename"
                         type="text"
-                        className="h-[50px] "
+                        className="h-[50px] w-full"
                         placeholder="Prename"
                         {...register("prename")}
                     />
@@ -108,7 +112,7 @@ export default function SecondStepForm(props: Props) {
                 </Label>
                 <PhoneInput
                     id="phone"
-                    className="h-[50px] rounded"
+                    className="h-[50px] rounded w-full"
                     placeholder="Phone number"
                     onChange={(value) => {
                         if (value) {
@@ -123,7 +127,7 @@ export default function SecondStepForm(props: Props) {
                 />
                 <p
                     className={cn(
-                        "text-red-400 font-medium h-5  italic  opacity-0",
+                        "text-red-400 font-medium h-5 italic opacity-0",
                         {
                             "opacity-100": phoneErr,
                         }
@@ -139,7 +143,7 @@ export default function SecondStepForm(props: Props) {
                 <Input
                     id="address"
                     type="text"
-                    className="h-[50px] "
+                    className="h-[50px] w-full"
                     placeholder="Address"
                     {...register("address", {
                         required: "Address is required",
@@ -147,7 +151,7 @@ export default function SecondStepForm(props: Props) {
                 />
                 <p
                     className={cn(
-                        "text-red-500 font-medium h-5  italic  opacity-0",
+                        "text-red-500 font-medium h-5 italic opacity-0",
                         {
                             "opacity-100": errors?.address?.message,
                         }
@@ -156,7 +160,7 @@ export default function SecondStepForm(props: Props) {
                     {errors?.address?.message}
                 </p>
             </div>
-            <div className="mt-2">
+            <div className="mt-4">
                 <Label className="text-[16px] block mb-1" htmlFor="zipcode">
                     Zip code<span className="text-red-500 font-bold">*</span>
                 </Label>
@@ -164,7 +168,7 @@ export default function SecondStepForm(props: Props) {
                     id="zipcode"
                     type="text"
                     placeholder="Zip code"
-                    className="h-[50px] "
+                    className="h-[50px] w-full"
                     {...register("zipcode", {
                         required: "Zip code is required",
                         pattern: {
@@ -175,7 +179,7 @@ export default function SecondStepForm(props: Props) {
                 />
                 <p
                     className={cn(
-                        "text-red-500 font-medium h-5  italic  opacity-0",
+                        "text-red-500 font-medium h-5 italic opacity-0",
                         {
                             "opacity-100": errors.zipcode?.message,
                         }
@@ -186,8 +190,7 @@ export default function SecondStepForm(props: Props) {
             </div>
             <LoadingButton
                 isLoading={isLoading}
-                // type="submit"
-                className="mt-4 text-white  active:scale-[98%] transition-all w-full h-[50px] bg-neutral-800  font-bold rounded"
+                className="mt-6 text-white active:scale-[98%] transition-all w-full h-[50px] bg-neutral-800 font-bold rounded"
             >
                 Finish the order
             </LoadingButton>

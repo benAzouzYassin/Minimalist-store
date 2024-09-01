@@ -49,7 +49,7 @@ export default function CartItem({ product }: CartItemProps) {
                 }}
             ></div>
             <div className="flex-grow ml-2 flex flex-col">
-                <p className=" line-clamp-2 font-semibold pr-4">
+                <p className=" line-clamp-2  text-left font-semibold pr-5">
                     {product.name}
                 </p>
                 <div className="w-[90px]   mt-auto grid grid-cols-3">

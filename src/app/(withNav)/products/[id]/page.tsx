@@ -15,7 +15,7 @@ export default async function Page({ params }: Props) {
         return (
             <section className="min-h-screen pb-20">
                 <MainDetails product={product} />
-                <div className="grid grid-cols-4 px-[150px] mt-10 gap-5">
+                <div className="grid sm:grid-cols-2 grid-cols-1 lg:grid-cols-4 px-5 md:px-[80px] lg:px-[150px] mt-10 gap-5">
                     {product?.details?.map((item: any) => {
                         return (
                             <div

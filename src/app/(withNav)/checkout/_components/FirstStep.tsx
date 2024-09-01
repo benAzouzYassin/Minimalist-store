@@ -10,6 +10,7 @@ type Props = {
         SetStateAction<"verification" | "information" | "success">
     >;
 };
+
 export default function FirstStep(props: Props) {
     const { products, coupon } = useCartStore();
     const [subtotal, setSubtotal] = useState(0);
@@ -48,12 +49,14 @@ export default function FirstStep(props: Props) {
 
         calculateSubtotal();
     }, [products, coupon]);
+
     const total = subtotal + deliveryFee;
+
     return (
-        <section className="flex relative w-[1200px] mt-10">
+        <section className="flex flex-col lg:flex-row  relative w-full max-w-[1200px] mt-10 px-4 lg:px-0">
             <ProductsTable />
-            <div className="flex-grow absolute -right-5 w-[30%] ">
-                <div className="py-5 px-5  rounded-2xl shadow-[0px_0px_10px] shadow-black/10 pb-5 border">
+            <div className="lg:flex-grow lg:absolute lg:-right-5 w-full lg:w-[30%] mt-8 lg:mt-0">
+                <div className="py-5 px-5 rounded-2xl shadow-[0px_0px_10px] shadow-black/10 pb-5 border">
                     <p className="text-2xl font-bold">Cart Summary</p>
                     <p className="flex uppercase items-center font-bold text-black/60 mt-5">
                         Subtotal
@@ -115,102 +118,115 @@ function ProductsTable() {
     };
 
     return (
-        <table className="w-[70%] bg-white shadow-md rounded-lg overflow-hidden">
-            <thead>
-                <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th className="py-3 px-6 text-left">Product</th>
-                    <th className="py-3 px-6 text-center">Price</th>
-                    <th className="py-3 px-6 text-center">Quantity</th>
-                    <th className="py-3 px-6 text-center">Total</th>
-                    <th className="py-3 px-6 text-center">Action</th>
-                </tr>
-            </thead>
-            <tbody className="text-gray-600 font-semibold">
-                {products.map((product) => (
-                    <tr key={product.id} className="border-b border-gray-200">
-                        <td className="py-3 pl-3 text-left max-w-[300px] flex items-center">
-                            <img
-                                src={product.image}
-                                alt={product.name}
-                                className="w-16 border rounded-md h-16 object-cover mr-4"
-                            />
-                            <span className="line-clamp-2">{product.name}</span>
-                        </td>
-                        <td className="py-3 px-3 text-center">
-                            {product.promotion?.isDiscounted ? (
-                                <div>
-                                    <p className="line-through opacity-50">
-                                        ${Number(product.price).toFixed(2)}
-                                    </p>
-                                    <p className=" text-red-500">
-                                        $
-                                        {Number(
-                                            product.promotion.discountedPrice
-                                        ).toFixed(2)}
-                                    </p>
+        <div className="w-full lg:w-[70%] overflow-x-auto">
+            <table className="w-full bg-white shadow-md rounded-lg overflow-hidden">
+                <thead className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <tr>
+                        <th className="py-3 px-6 text-left">Product</th>
+                        <th className="py-3 px-6 text-center">Price</th>
+                        <th className="py-3 px-6 text-center">Quantity</th>
+                        <th className="py-3 px-6 text-center">Total</th>
+                        <th className="py-3 px-6 text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody className="text-gray-600 font-semibold">
+                    {products.map((product) => (
+                        <tr
+                            key={product.id}
+                            className="border-b border-gray-200"
+                        >
+                            <td className="py-3 pl-3 text-left max-w-[300px] flex items-center">
+                                <img
+                                    src={product.image}
+                                    alt={product.name}
+                                    className="w-16 border rounded-md h-16 object-cover mr-4"
+                                />
+                                <span className="line-clamp-2">
+                                    {product.name}
+                                </span>
+                            </td>
+                            <td className="py-3 px-3 text-center">
+                                {product.promotion?.isDiscounted ? (
+                                    <div>
+                                        <p className="line-through opacity-50">
+                                            ${Number(product.price).toFixed(2)}
+                                        </p>
+                                        <p className="text-red-500">
+                                            $
+                                            {Number(
+                                                product.promotion
+                                                    .discountedPrice
+                                            ).toFixed(2)}
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <p>${Number(product.price).toFixed(2)}</p>
+                                )}
+                            </td>
+                            <td className="py-3 px-2 text-center">
+                                <div className="flex justify-center items-center">
+                                    <button
+                                        onClick={() =>
+                                            handleDecreaseQuantity(product.id)
+                                        }
+                                        className="p-2"
+                                    >
+                                        <Minus className="w-4 h-4" />
+                                    </button>
+                                    <span className="px-3">
+                                        {product.quantity}
+                                    </span>
+                                    <button
+                                        onClick={() =>
+                                            handleIncreaseQuantity(product.id)
+                                        }
+                                        className="p-2"
+                                    >
+                                        <Plus className="w-4 h-4" />
+                                    </button>
                                 </div>
-                            ) : (
-                                <p> ${Number(product.price).toFixed(2)}</p>
-                            )}
-                        </td>
-                        <td className="py-3 px-2 text-center">
-                            <div className="flex justify-center items-center">
-                                <button
-                                    onClick={() =>
-                                        handleDecreaseQuantity(product.id)
-                                    }
-                                    className="p-2"
-                                >
-                                    <Minus className="w-4 h-4" />
-                                </button>
-                                <span className="px-3">{product.quantity}</span>
-                                <button
-                                    onClick={() =>
-                                        handleIncreaseQuantity(product.id)
-                                    }
-                                    className="p-2"
-                                >
-                                    <Plus className="w-4 h-4" />
-                                </button>
-                            </div>
-                        </td>
-                        <td className="py-3 px-2 text-center">
-                            {product.promotion?.isDiscounted ? (
-                                <div>
-                                    <p className="line-through opacity-50">
+                            </td>
+                            <td className="py-3 px-2 text-center">
+                                {product.promotion?.isDiscounted ? (
+                                    <div>
+                                        <p className="line-through opacity-50">
+                                            $
+                                            {(
+                                                product.price * product.quantity
+                                            ).toFixed(2)}
+                                        </p>
+                                        <p className="text-red-500">
+                                            $
+                                            {(
+                                                product.promotion
+                                                    .discountedPrice *
+                                                product.quantity
+                                            ).toFixed(2)}
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <p>
                                         $
                                         {(
                                             product.price * product.quantity
                                         ).toFixed(2)}
                                     </p>
-                                    <p className=" text-red-500">
-                                        $
-                                        {(
-                                            product.promotion.discountedPrice *
-                                            product.quantity
-                                        ).toFixed(2)}
-                                    </p>
-                                </div>
-                            ) : (
-                                <p>
-                                    $
-                                    {(product.price * product.quantity).toFixed(
-                                        2
-                                    )}
-                                </p>
-                            )}
-                        </td>
-                        <td className="py-3 px-2 text-center">
-                            <button
-                                onClick={() => handleRemoveProduct(product.id)}
-                                className="text-red-500 hover:text-red-700"
-                            >
-                                <Trash className="w-4 h-4" />
-                            </button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+                                )}
+                            </td>
+                            <td className="py-3 px-2 text-center">
+                                <button
+                                    onClick={() =>
+                                        handleRemoveProduct(product.id)
+                                    }
+                                    className="text-red-500 hover:text-red-700"
+                                >
+                                    <Trash className="w-4 h-4" />
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 }

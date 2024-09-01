@@ -5,7 +5,7 @@ export default function FailPage() {
         <div className="min-h-screen px-10 flex flex-col">
             <div className="relative mt-5 mx-auto w-full max-w-3xl">
                 <div className="relative z-10 text-center">
-                    <div className="w-20 h-20 bg-red-500 mt-16 mx-auto text-white flex items-center justify-center rounded-full">
+                    <div className="w-20 h-20 bg-red-500 mt-8 md:mt-16 mx-auto text-white flex items-center justify-center rounded-full">
                         <X className="w-14 stroke-[3] h-14" />
                     </div>
                     <h1 className="text-4xl font-bold pt-5">

@@ -36,7 +36,7 @@ export default function Trending() {
     }
     return (
         <>
-            <h2 className="font-semibold mt-20 text-4xl font-mono">
+            <h2 className="font-semibold mt-20 md:text-4xl text-3xl font-mono">
                 Trending products
             </h2>
 
@@ -46,7 +46,7 @@ export default function Trending() {
                     dragFree: true,
                 }}
             >
-                <CarouselContent>
+                <CarouselContent className="mt-8 pl-10 md:pl-0 ">
                     {products.map((product) => (
                         <CarouselItem
                             key={product.id}
@@ -65,8 +65,8 @@ export default function Trending() {
                         </CarouselItem>
                     ))}{" "}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="sm:flex hidden" />
+                <CarouselNext className="md:-right-12 md:top-1/2 md:-translate-y-1/2 left-0 md:left-auto rotate-180 md:rotate-0" />
             </Carousel>
         </>
     );

@@ -2,28 +2,12 @@
 
 import ProductCard from "@/components/shared/ProductCard";
 import ProductCardSkeleton from "@/components/shared/ProductCardSkeleton";
-import { Input } from "@/components/ui/input";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-} from "@/components/ui/select";
 import { apiBase } from "@/lib/axios";
-import { cn } from "@/lib/utils";
 import { populateIsDiscounted } from "@/utils/productPromotion";
-import { Search } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Page() {
-    const searchParams = useSearchParams();
-    const router = useRouter();
-
     const [allProducts, setAllProducts] = useState<Product[]>([]);
-    const [allCategories, setAllCategories] = useState<Category[]>([]);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [visibleProducts, setVisibleProducts] = useState<Product[]>([]);
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -39,44 +23,31 @@ export default function Page() {
             })
             .catch((err) => console.error(err))
             .finally(() => setIsLoading(false));
-        apiBase
-            .get("/categories")
-            .then((res) => setAllCategories(res.data))
-            .catch((err) => console.error(err));
     }, []);
 
-    console.log(allProducts);
-    useEffect(() => {
-        let filteredProducts = allProducts;
-
-        if (searchQuery) {
-            filteredProducts = filteredProducts.filter((product) =>
-                product.name.toLowerCase().includes(searchQuery.toLowerCase())
-            );
-        }
-        setVisibleProducts(filteredProducts);
-    }, [allProducts, searchQuery]);
-
     return (
-        <section className="pt-20 flex flex-col pb-10 relative min-h-screen">
-            <div className="flex w-[1220px] mx-auto items-center ">
-                <h2 className="font-semibold text-4xl font-mono">
+        <section className="pt-10 flex flex-col px-4 md:px-10 lg:px-[100px] pb-10 relative min-h-screen">
+            <div className="flex max-w-[1220px] items-center ">
+                <h2 className="font-semibold text-3xl md:text-4xl w-full text-left font-mono">
                     In sale products
                 </h2>
             </div>
             <section className="flex gap-4 mt-5">
-                <section className="gap-y-5 gap-x-6 mx-auto !w-[1220px]  grid grid-cols-4 justify-center">
-                    {isLoading &&
-                        Array.from({ length: 5 }).map((_, i) => (
-                            <ProductCardSkeleton
-                                className="w-[290px]"
-                                key={i}
-                            />
-                        ))}
+                <section className="gap-y-5 gap-x-4 justify-center sm:gap-x-6 max-w-[1220px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    {isLoading && (
+                        <div className="flex w-[90vw] md:justify-center  flex-wrap gap-3">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                                <ProductCardSkeleton
+                                    className="w-full md:w-[300px]"
+                                    key={i}
+                                />
+                            ))}
+                        </div>
+                    )}
 
-                    {visibleProducts.map((p) => (
+                    {allProducts.map((p) => (
                         <ProductCard
-                            className={cn("w-[290px]")}
+                            className="w-full mx-auto md:mx-0"
                             promotion={p.promotion}
                             key={p.id}
                             id={p.id}
@@ -91,15 +62,6 @@ export default function Page() {
         </section>
     );
 }
-
-type Category = {
-    createdAt: string;
-    description: string;
-    id: number;
-    imageURL: string;
-    name: string;
-    updatedAt: string;
-};
 
 export type Product = {
     id: number;

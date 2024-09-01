@@ -53,8 +53,8 @@ export default function SimilarProducts({
         return null;
     }
     return (
-        <section className="w-full px-[150px] ">
-            <h2 className="font-semibold mt-20 text-4xl font-mono">
+        <section className="w-full md:px-[50px] px-6  lg:px-[150px] ">
+            <h2 className="font-semibold mt-20 text-3xl mb-5 md:text-4xl font-mono">
                 Similar Products
             </h2>
             <Carousel
@@ -63,7 +63,7 @@ export default function SimilarProducts({
                     dragFree: true,
                 }}
             >
-                <CarouselContent>
+                <CarouselContent className="pl-10 ">
                     {similarProducts.map((product) => (
                         <CarouselItem
                             key={product.id}
@@ -80,8 +80,8 @@ export default function SimilarProducts({
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="sm:flex hidden" />
+                <CarouselNext className="md:-right-12 md:top-1/2 md:-translate-y-1/2 left-0 md:left-auto rotate-180 md:rotate-0" />
             </Carousel>
         </section>
     );

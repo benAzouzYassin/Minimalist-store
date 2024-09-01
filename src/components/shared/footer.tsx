@@ -12,12 +12,12 @@ import Link from "next/link";
 export default function Footer() {
     return (
         <footer
-            className="relative h-[195px] bg-black"
+            className="relative md:h-[195px] -z-10 h-[90px] bg-black"
             style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
         >
             <div className="fixed pt-20   bottom-0   h-[195px] w-full text-white">
-                <div className="flex px-28 ">
-                    <div className="flex w-1/4 gap-2 h-12  ">
+                <div className="md:flex hidden md:px-28 ">
+                    <div className="flex md:w-1/4 gap-2 h-12  ">
                         <div>
                             <Truck className="w-6 h-6 text-red-500" />
                         </div>
@@ -64,7 +64,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className=" flex px-28  mt-8 opacity-80  text-sm font-normal">
+                <div className=" flex  px-3 w-full   md:mt-10 md:static absolute bottom-4 opacity-80  md:px-8 text-xs md:text-sm font-normal">
                     © 2024{" "}
                     <Link
                         target="_blank"
@@ -74,7 +74,7 @@ export default function Footer() {
                         Yassine ben azouz
                     </Link>
                     . All rights reserved
-                    <div className="scale-125 gap-2  flex ml-auto">
+                    <div className="md:scale-125 gap-2  flex ml-auto">
                         <Facebook className="ml-auto " />
                         <Instagram />
                     </div>

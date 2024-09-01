@@ -12,8 +12,12 @@ import CartItem from "./CartItem";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/global-stores/cartStore";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-export default function Cart() {
+type Props = {
+    className?: string;
+};
+export default function Cart(props: Props) {
     const { products, isOpen, setIsOpen } = useCartStore();
     const subtotal = products.reduce(
         (sum, product) => sum + product.price * product.quantity,
@@ -22,16 +26,16 @@ export default function Cart() {
 
     return (
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger>
+            <SheetTrigger className={cn(props.className)}>
                 <CartIcon />
             </SheetTrigger>
-            <SheetContent className="sm:max-w-[450px]">
+            <SheetContent className="sm:max-w-[450px] ">
                 <SheetHeader>
-                    <SheetTitle className="text-lg font-bold mb-2">
+                    <SheetTitle className="text-lg sm:mt-0 mt-1 text-left font-bold mb-2">
                         Shopping Cart
                     </SheetTitle>
                     <div className="flex flex-col h-[100vh] ">
-                        <div className="flex-grow pb-4 flex flex-col gap-3 overflow-auto max-h-[calc(100%-155px)]">
+                        <div className="flex-grow pb-4 flex flex-col gap-3 sm:mt-0 mt-5  overflow-auto max-h-[calc(100%-155px)]">
                             {products.length > 0 ? (
                                 products.map((product, index) => (
                                     <CartItem key={index} product={product} />

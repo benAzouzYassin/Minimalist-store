@@ -70,21 +70,21 @@ export default function MainDetails({ product }: Props) {
     };
 
     return (
-        <div className="grid grid-cols-2 gap-4  3xl:px-[250px] px-[200px] pt-10 ">
-            <div className=" max-w-[560px] ml-auto">
+        <div className="grid lg:grid-cols-2 gap-4 px-4  md:px-16 3xl:px-[250px] xl:px-[200px] pt-10 ">
+            <div className=" max-w-[560px] mx-auto lg:ml-auto">
                 <ProductImages
                     mainImage={product.imageURL}
                     otherImages={product.otherImages}
                 />
             </div>
 
-            <div className="bg-neutral-100 relative max-w-[650px] rounded-2xl pt-5 px-8">
+            <div className="bg-neutral-100 relative lg:max-w-[650px] rounded-2xl pt-5 px-4 md:px-8">
                 {product.promotion?.isDiscounted && (
                     <span className="bg-red-600/90 flex items-center justify-center z-50 text-sm font-semibold top-14  right-0 px-2 py-[7px]  rounded-r-none rounded-l-md text-white absolute">
                         SAVE {product.promotion.discountPercentage}
                     </span>
                 )}
-                <h1 className="text-3xl font-bold max-w-[90%] line-clamp-2">
+                <h1 className="md:text-3xl text-2xl font-bold max-w-[90%] line-clamp-2">
                     {product.name}
                 </h1>
                 <p className="font-medium text-sm opacity-50">
@@ -116,13 +116,13 @@ export default function MainDetails({ product }: Props) {
                         {Number(product.price).toFixed(2)}$
                     </p>
                 )}
-                <p className="text-black/60 font-medium mt-2 ">
+                <p className="text-black/60 md:text-[1rem] text-sm font-medium mt-2 ">
                     The rounded square design of the toaster allows it to fit
                     neatly against a wall, or inside a corner. Excellent at
                     defrosting, and with the perfect bread-to-heater distance to
                     give crunchy toast with a soft, spongy middle.
                 </p>
-                <div className=" mt-20 flex  gap-2 ">
+                <div className=" lg:mt-20 mt-7  flex  gap-2 ">
                     <div className="border grid grid-cols-3 h-[50px] justify-center items-center w-[150px] overflow-hidden border-black rounded-xl font-bold">
                         <button
                             onClick={handleDecreaseQuantity}
@@ -147,7 +147,7 @@ export default function MainDetails({ product }: Props) {
                         Add to cart
                     </Button>
                 </div>
-                <div className="flex mt-2 items-center gap-2">
+                <div className="flex mt-2 items-center pb-7 md:pb-2 gap-2">
                     <Button
                         onClick={handleByNow}
                         className="h-[50px] text-lg active:scale-95 transition-all w-full flex-grow"

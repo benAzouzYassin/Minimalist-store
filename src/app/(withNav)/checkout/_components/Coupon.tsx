@@ -47,7 +47,7 @@ export default function Coupon() {
                 e.preventDefault();
                 handleSubmit();
             }}
-            className="mt-10 py-5 px-5 -right-5 rounded-2xl shadow-[0px_0px_10px] shadow-black/10 pb-5 border"
+            className="mt-10 py-5 px-5 -right-5 bg-white rounded-2xl shadow-[0px_0px_10px] shadow-black/10 pb-5 border"
         >
             <p className="text-2xl font-bold mb-3">Coupon code</p>
             <div className="space-y-3">

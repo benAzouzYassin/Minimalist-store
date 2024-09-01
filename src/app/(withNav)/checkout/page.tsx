@@ -37,58 +37,63 @@ export default function Page() {
         return <EmptyPage />;
     }
     return (
-        <section className="min-h-screen flex flex-col items-center">
-            <h1 className="font-bold text-4xl pt-20 text-center">Checkout</h1>
-            <section className="max-w-[1000px] mt-12 w-full mx-auto">
-                <section className="grid gap-16 grid-cols-3">
+        <section className="min-h-screen flex  flex-col items-center">
+            <h1 className="font-bold text-3xl sm:text-4xl md:pt-20 pt-5 text-center">
+                Checkout
+            </h1>
+
+            <section className="max-w-[1000px] mt-12 w-full px-4 sm:px-0 mx-auto">
+                <section className="grid gap-8 sm:gap-16 grid-cols-1 sm:grid-cols-3">
                     <div
                         onClick={() => setCurrentStep("verification")}
                         className={cn(
-                            " flex relative group active:scale-[98%] opacity-30 hover:cursor-pointer hover:opacity-70 transition-all items-center flex-row w-full",
+                            "flex relative group active:scale-[98%] opacity-30 hover:cursor-pointer hover:opacity-70 transition-all items-center w-full",
                             {
                                 "opacity-100 hover:opacity-100":
                                     currentStep === "verification",
                             }
                         )}
                     >
-                        <div className="pb-3 flex font-medium text-xl">
-                            <span className="w-9 h-9 flex items-center justify-center rounded-full text-lg font-semibold bg-black/80 text-white">
+                        <div className="pb-3 flex font-medium text-lg sm:text-xl">
+                            <span className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full text-md sm:text-lg font-semibold bg-black/80 text-white">
                                 1
                             </span>
-                            <div className="mt-auto uppercase mb-1 ml-3 text-[20px] font-bold">
+                            <div className="mt-auto uppercase mb-1 ml-2 sm:ml-3 text-[16px] sm:text-[20px] font-bold">
                                 Verify products
                             </div>
                             <div className="h-[2px] bg-black group-hover:w-full transition-all absolute left-1 bottom-0 w-0 opacity-100"></div>
                             <div className="h-[2px] bg-black w-full absolute left-1 bottom-0"></div>
                         </div>
                     </div>
+
                     <div
                         onClick={() => setCurrentStep("information")}
                         className={cn(
-                            "flex relative group active:scale-[98%] opacity-30 hover:cursor-pointer hover:opacity-70 transition-all items-center flex-row w-full",
+                            "flex relative group active:scale-[98%] opacity-30 hover:cursor-pointer hover:opacity-70 transition-all items-center w-full",
                             {
                                 "opacity-100 hover:opacity-100":
                                     currentStep === "information",
                             }
                         )}
                     >
-                        <div className="pb-3 flex font-medium text-xl">
-                            <span className="w-9 h-9 flex items-center justify-center rounded-full text-lg font-semibold bg-black/80 text-white">
+                        <div className="pb-3 flex font-medium text-lg sm:text-xl">
+                            <span className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full text-md sm:text-lg font-semibold bg-black/80 text-white">
                                 2
                             </span>
-                            <div className="mt-auto  uppercase mb-1 ml-3 text-[20px] font-bold">
+                            <div className="mt-auto uppercase mb-1 ml-2 sm:ml-3 text-[16px] sm:text-[20px] font-bold">
                                 Delivery information
                             </div>
                             <div className="h-[2px] bg-black w-full absolute left-1 bottom-0 opacity-30"></div>
                             <div className="h-[2px] bg-black group-hover:w-full transition-all absolute left-1 bottom-0 w-0 opacity-100"></div>
                         </div>
                     </div>
-                    <div className="flex hover:cursor-not-allowed relative opacity-30 items-center flex-row w-full">
-                        <div className="pb-3 flex font-medium text-xl">
-                            <span className="w-9 h-9 flex items-center justify-center rounded-full text-lg font-semibold bg-black/80 text-white">
+
+                    <div className="flex hover:cursor-not-allowed relative opacity-30 items-center w-full">
+                        <div className="pb-3 flex font-medium text-lg sm:text-xl">
+                            <span className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full text-md sm:text-lg font-semibold bg-black/80 text-white">
                                 3
                             </span>
-                            <div className="mt-auto uppercase mb-1 ml-3 text-[20px] font-bold">
+                            <div className="mt-auto uppercase mb-1 ml-2 sm:ml-3 text-[16px] sm:text-[20px] font-bold">
                                 Payment & success
                             </div>
                             <div className="h-[2px] bg-black w-full absolute left-1 bottom-0"></div>
@@ -96,24 +101,26 @@ export default function Page() {
                     </div>
                 </section>
             </section>
-            <div className="flex h-[100vh] transition-all w-full ">
+
+            <div className="flex min-h-[100vh] pb-20 transition-all w-full !overflow-x-hidden">
                 <div
                     className={cn(
-                        " w-[1200px] transition-all   duration-500 ease-out absolute left-1/2 -translate-x-1/2 mx-auto",
+                        "w-full sm:w-[1200px] min-h-[100vh] pb-20 bg-white transition-all duration-500 ease-out absolute left-1/2 transform -translate-x-1/2",
                         {
-                            "flex absolute w-[1200px] opacity-0 mx-auto left-0 -translate-x-[100%]":
-                                currentStep != "verification",
+                            "flex w-full sm:w-[1200px] opacity-0 left-0 -translate-x-full":
+                                currentStep !== "verification",
                         }
                     )}
                 >
                     <FirstStep setCurrentStep={setCurrentStep} />
                 </div>
+
                 <div
                     className={cn(
-                        " w-[1200px]  transition-all duration-500 ease-out  absolute left-1/2 -translate-x-1/2 mx-auto",
+                        "w-full xl:w-[1200px] flex  transition-all duration-500 ease-out absolute left-1/2 transform -translate-x-1/2",
                         {
-                            "flex absolute w-[1200px] opacity-0 mx-auto right-0 translate-x-[100%]":
-                                currentStep != "information",
+                            "w-full lg:w-[1200px] md:flex hidden opacity-0 right-0 translate-x-full":
+                                currentStep !== "information",
                         }
                     )}
                 >
