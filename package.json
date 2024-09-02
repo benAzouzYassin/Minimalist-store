@@ -29,6 +29,7 @@
     "nextjs-toploader": "^1.6.12",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
+    "posthog-js": "^1.160.1",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.2",

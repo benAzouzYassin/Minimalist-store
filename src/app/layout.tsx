@@ -5,6 +5,7 @@ import { Poppins } from "next/font/google";
 import Footer from "@/components/shared/footer";
 import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
+import { CSPostHogProvider } from "@/providers/PostHog";
 export const dynamic = "force-dynamic";
 
 const poppins = Poppins({
@@ -24,11 +25,13 @@ export default function RootLayout({
 }>) {
     return (
         <html className="overflow-x-hidden" lang="en">
-            <body className={cn("min-w-[100vw]", poppins.className)}>
-                {children}
-                <Footer />
-                <Toaster expand visibleToasts={1} richColors />
-            </body>
+            <CSPostHogProvider>
+                <body className={cn("min-w-[100vw]", poppins.className)}>
+                    {children}
+                    <Footer />
+                    <Toaster expand visibleToasts={1} richColors />
+                </body>
+            </CSPostHogProvider>
         </html>
     );
 }
