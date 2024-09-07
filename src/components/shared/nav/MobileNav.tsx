@@ -27,17 +27,13 @@ const NavItem = ({
     name: string;
     href: string;
 }) => (
-    <li
+    <Link
+        href={href}
         onClick={onClick}
-        className="w-[100vw] active:bg-neutral-100 text-center active:scale-95 transition-all border "
+        className="group w-[100vw] active:bg-neutral-100 text-center active:scale-95 transition-all border relative inline-block py-2 text-2xl font-mono "
     >
-        <Link
-            href={href}
-            className="group relative inline-block py-2 text-2xl font-mono transition-transform "
-        >
-            {name}
-        </Link>
-    </li>
+        {name}
+    </Link>
 );
 
 export default function MobileNav() {
@@ -52,7 +48,7 @@ export default function MobileNav() {
                     <DrawerTitle>Menu</DrawerTitle>
                 </DrawerHeader>
                 <nav className="flex  flex-grow flex-col items-center justify-center px-4">
-                    <ul className="space-y-6  text-black">
+                    <div className="space-y-6  text-black">
                         {navItems.map((item) => (
                             <NavItem
                                 onClick={() => setIsOpen(false)}
@@ -60,10 +56,10 @@ export default function MobileNav() {
                                 {...item}
                             />
                         ))}
-                        <li className="pt-4 flex items-center justify-center">
+                        <div className="pt-4 flex items-center justify-center">
                             <Cart className="scale-150" />
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </nav>
                 <DrawerClose className="absolute right-4 top-4">
                     <X className="h-6 w-6" />

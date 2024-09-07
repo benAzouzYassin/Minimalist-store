@@ -8,13 +8,12 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel";
 
-import { Product } from "../page";
 import ProductCard from "@/components/shared/ProductCard";
-import { ArrowLeft, ArrowRight } from "iconsax-react";
-import { useEffect, useState } from "react";
 import { apiBase } from "@/lib/axios";
-import TrendingProductsLoading from "./loading/TrendingProductsLoading";
 import { populateIsDiscounted } from "@/utils/productPromotion";
+import { useEffect, useState } from "react";
+import { Product } from "../page";
+import TrendingProductsLoading from "./loading/TrendingProductsLoading";
 
 export default function Trending() {
     const [products, setProducts] = useState<Product[]>([]);
@@ -50,10 +49,10 @@ export default function Trending() {
                     {products.map((product) => (
                         <CarouselItem
                             key={product.id}
-                            className="md:basis-1/2 lg:basis-[300px]"
+                            className="basis-[220px]  md:basis-1/2 lg:basis-[300px]"
                         >
                             <ProductCard
-                                className="w-auto shadow-[0px_0px_10px] shadow-black/10"
+                                className="w-auto h-[220px] shadow-[0px_0px_10px] shadow-black/10"
                                 promotion={product.promotion}
                                 key={product.id}
                                 id={product.id}

@@ -1,15 +1,17 @@
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import Hero from "./_componentts/Hero";
 import TopProductLoading from "./_componentts/loading/TopProductsLoading";
 import TrendingProductsLoading from "./_componentts/loading/TrendingProductsLoading";
-import TopProducts from "./_componentts/TopProducts";
-import Trending from "./_componentts/Trending";
+
+const TopProducts = dynamic(() => import("./_componentts/TopProducts"));
+const Trending = dynamic(() => import("./_componentts/Trending"));
 
 export default async function Home() {
     return (
-        <section className="lg:px-[150px] md:px-[50px] px-4 pb-28 pt-10">
+        <section className="lg:px-[150px] md:px-[50px] px-4 pb-28 md:pt-10">
             <Hero />
             <Suspense fallback={<TopProductLoading />}>
                 <TopProducts />
@@ -36,7 +38,7 @@ export default async function Home() {
                     src={"/assets/banner1.png"}
                     width={600}
                     height={600}
-                    className="w-full h-full object-center object-contain"
+                    className="w-full  h-full object-center object-contain"
                 />
             </section>
 

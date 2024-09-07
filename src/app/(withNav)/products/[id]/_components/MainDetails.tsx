@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Heart } from "iconsax-react";
 import { Minus, Plus } from "lucide-react";
 import { Product } from "../page";
-import ProductImages from "./ProductImages";
+const ProductImages = dynamic(() => import("./ProductImages"));
 import { useCartStore } from "@/global-stores/cartStore";
 import { useRouter } from "next/navigation";
 import { useFavoritesStore } from "@/global-stores/favoritesStore";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
 
 type Props = {
     product: Product;

@@ -10,14 +10,14 @@ export default async function TopProducts() {
         | undefined;
     const topProducts = populateIsDiscounted(data);
     return (
-        <section className="mt-20">
-            <h2 className="font-semibold md:text-4xl text-3xl font-mono">
+        <section className="md:mt-20">
+            <h2 className="font-semibold md:block hidden md:text-4xl text-3xl font-mono">
                 Top products
             </h2>
-            <div className="mt-5 flex  flex-wrap justify-center md:gap-x-5 gap-y-5 md:gap-y-8">
+            <div className="mt-5 md:flex grid grid-cols-2 gap-3 flex-wrap justify-center md:gap-x-5 md:gap-y-8">
                 {topProducts?.map((product: Product) => (
                     <ProductCard
-                        className="w-full md:w-[290px]"
+                        className=" w-auto md:w-[290px]"
                         promotion={product.promotion}
                         key={product.id}
                         id={product.id}

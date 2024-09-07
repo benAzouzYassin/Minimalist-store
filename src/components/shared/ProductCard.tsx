@@ -1,8 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { CSSProperties, Suspense, useState } from "react";
+import { CSSProperties, Suspense } from "react";
 
 type Props = {
     id: number;
@@ -25,7 +26,7 @@ export default function ProductCard(props: Props) {
             style={props.style}
             href={`/products/${props.id}`}
             className={cn(
-                "border-2 flex group py-2 overflow-hidden active:scale-95 relative hover:cursor-pointer flex-col px-4  w-[250px] h-[350px] transition-transform rounded",
+                "border-2 flex group py-2 overflow-hidden active:scale-95 relative hover:cursor-pointer flex-col pl-3 pr-1 md:px-4  w-[250px] md:h-[350px] transition-transform rounded",
                 props.className
             )}
         >
@@ -50,7 +51,7 @@ export default function ProductCard(props: Props) {
                 />
             </Suspense>
             <div>
-                <p className="pt-2 line-clamp-2 font-medium mt-auto">
+                <p className="pt-2 line-clamp-1  md:line-clamp-2 md:text-[1rem] text-sm font-medium mt-auto">
                     {props.name}
                 </p>
                 {props.promotion?.isDiscounted ? (
@@ -63,7 +64,7 @@ export default function ProductCard(props: Props) {
                         </p>
                     </div>
                 ) : (
-                    <p className="font-semibold text-[18px] absolute bottom-4">
+                    <p className="font-semibold text-[18px] absolute md:bottom-4">
                         ${props.price}
                     </p>
                 )}

@@ -1,8 +1,9 @@
-import NotFoundPage from "@/app/not-found";
+const NotFoundPage = dynamic(() => import("@/app/not-found"));
 import { apiBase } from "@/lib/axios";
 import MainDetails from "./_components/MainDetails";
-import SimilarProducts from "./_components/SimilarProducts";
+const SimilarProducts = dynamic(() => import("./_components/SimilarProducts"));
 import { populateIsDiscounted } from "@/utils/productPromotion";
+import dynamic from "next/dynamic";
 
 type Props = {
     params: { id: string };
