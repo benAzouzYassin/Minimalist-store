@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/global-stores/cartStore";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import posthog from "posthog-js";
 
 type Props = {
     className?: string;
@@ -72,7 +73,12 @@ export default function Cart(props: Props) {
                                 </div>
                                 <Link
                                     href={"/checkout"}
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={() => {
+                                        setIsOpen(false);
+                                        posthog?.capture(
+                                            "checkout_button_clicked"
+                                        );
+                                    }}
                                 >
                                     <Button className="w-full active:scale-95 transition-all hover:bg-white hover:text-black border-black border-2 rounded mt-1">
                                         Go to checkout

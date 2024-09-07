@@ -4,6 +4,7 @@ import MainDetails from "./_components/MainDetails";
 const SimilarProducts = dynamic(() => import("./_components/SimilarProducts"));
 import { populateIsDiscounted } from "@/utils/productPromotion";
 import dynamic from "next/dynamic";
+import posthog from "posthog-js";
 
 type Props = {
     params: { id: string };
@@ -13,6 +14,10 @@ export default async function Page({ params }: Props) {
     try {
         const { data } = await apiBase.get(`/products/${params.id}`);
         const product = populateIsDiscounted(data);
+        posthog?.capture("product_view", {
+            product_id: params.id,
+        });
+
         return (
             <section className="min-h-screen pb-20">
                 <MainDetails product={product} />

@@ -12,6 +12,7 @@ import { useFavoritesStore } from "@/global-stores/favoritesStore";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
+import posthog from "posthog-js";
 
 type Props = {
     product: Product;
@@ -38,6 +39,10 @@ export default function MainDetails({ product }: Props) {
         if (existingProductIndex >= 0) {
             updatedProducts[existingProductIndex].quantity += quantity;
         } else {
+            posthog?.capture("add_product_to_cart", {
+                product_id: product.id,
+            });
+
             updatedProducts.push({
                 promotion: product.promotion,
                 id: product.id,
