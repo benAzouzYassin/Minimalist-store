@@ -39,7 +39,7 @@ export default function CartItem({ product }: CartItemProps) {
     };
 
     return (
-        <div className="h-[110px] py-2 flex relative border bg-neutral-50 rounded">
+        <div className="h-[110px] min-h-[110px] py-2 flex relative border bg-neutral-50 rounded">
             <div
                 className="min-w-[70px] w-[70px] my-auto ml-3 h-[70px] bg-neutral-300 rounded-lg"
                 style={{
@@ -73,7 +73,7 @@ export default function CartItem({ product }: CartItemProps) {
                     className="h-7 absolute top-1 right-2 active:scale-95 transition-all text-black flex items-center justify-center  text-xl font-semibold rounded"
                     onClick={handleRemoveProduct}
                 >
-                    <X className="w-4 stroke-[2.4] h-4" />
+                    {/* <X className="w-4 stroke-[2.4] h-4" /> */}
                 </button>
             </div>
             {product.promotion?.isDiscounted ? (

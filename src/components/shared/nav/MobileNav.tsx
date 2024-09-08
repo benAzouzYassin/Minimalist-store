@@ -41,7 +41,7 @@ export default function MobileNav() {
     return (
         <Drawer open={isOpen} onOpenChange={setIsOpen}>
             <DrawerTrigger asChild>
-                <AlignJustify className="scale-150 absolute top-1/2 -translate-y-1/2 right-5 sm:hidden" />
+                <AlignJustify className="sm:scale-150 scale-125 absolute top-1/2 -translate-y-1/2 right-5 sm:hidden" />
             </DrawerTrigger>
             <DrawerContent className="h-[80vh]">
                 <DrawerHeader className="text-center">
@@ -56,8 +56,11 @@ export default function MobileNav() {
                                 {...item}
                             />
                         ))}
-                        <div className="pt-4 flex items-center justify-center">
-                            <Cart className="scale-150" />
+                        <div
+                            onClick={() => setIsOpen(false)}
+                            className="group h-fit w-[100vw] active:bg-neutral-100 text-center active:scale-95 transition-all border relative inline-block  text-2xl font-mono "
+                        >
+                            <Cart className=" flex items-center justify-center scale-125  w-full static h-[50px]" />
                         </div>
                     </div>
                 </nav>

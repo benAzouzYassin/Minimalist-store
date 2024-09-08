@@ -24,7 +24,6 @@ export default function Page() {
             .catch((err) => console.error(err))
             .finally(() => setIsLoading(false));
     }, []);
-
     return (
         <section className="pt-10 flex flex-col px-4 md:px-10 lg:px-[100px] pb-10 relative min-h-screen">
             <div className="flex max-w-[1220px] items-center ">

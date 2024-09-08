@@ -1,9 +1,9 @@
-import Link from "next/link";
-import Cart from "../cart/Cart";
-import { AlignJustify } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+const Cart = dynamic(() => import("../cart/Cart"));
 import MobileNav from "./MobileNav";
+import dynamic from "next/dynamic";
 
 export default function Nav() {
     const [isFixed, setIsFixed] = useState(false);
@@ -26,11 +26,11 @@ export default function Nav() {
     return (
         <nav
             className={cn(
-                "bg-white transition-all shadow h-[80px] sm:h-[var(---nav-height)]  z-[60] flex items-center px-[150px]   fixed  w-full  top-0 left-0",
-                { " h-[60px] sm:!h-[70px]": isFixed }
+                "bg-white transition-all shadow h-[65px] sm:h-[var(---nav-height)]  z-[60] flex items-center px-[150px]   fixed  w-full  top-0 left-0",
+                { " h-[50px] sm:!h-[70px]": isFixed }
             )}
         >
-            <Cart className="scale-125 absolute top-1/2 -translate-y-1/2 right-[75px] sm:hidden" />
+            <Cart className="sm:scale-125 absolute top-1/2 -translate-y-1/2 right-[60px] sm:right-[75px] sm:hidden" />
             <MobileNav />
             <ul className="ml-auto sm:flex hidden items-center  text-[20px] gap-8 font-mono ">
                 <li className="active:scale-95 transition-transform">
@@ -62,10 +62,5 @@ export default function Nav() {
                 </li>
             </ul>
         </nav>
-    );
-}
-function Logo() {
-    return (
-        <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[#B6002C]"></div>
     );
 }

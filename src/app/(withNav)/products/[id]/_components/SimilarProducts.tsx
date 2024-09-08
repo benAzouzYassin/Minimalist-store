@@ -67,10 +67,10 @@ export default function SimilarProducts({
                     {similarProducts.map((product) => (
                         <CarouselItem
                             key={product.id}
-                            className="md:basis-1/2 lg:basis-[300px]"
+                            className=" basis-[200px] md:basis-1/2  lg:basis-[300px]"
                         >
                             <ProductCard
-                                className="w-auto shadow-[0px_0px_10px] shadow-black/10"
+                                className="md:w-auto h-full w-[190px]  shadow-[0px_0px_10px] shadow-black/10"
                                 id={product?.id}
                                 price={product?.price as any}
                                 image={product?.imageURL}

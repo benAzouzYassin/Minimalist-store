@@ -26,7 +26,7 @@ export default function ProductCard(props: Props) {
             style={props.style}
             href={`/products/${props.id}`}
             className={cn(
-                "border-2 flex group py-2 overflow-hidden active:scale-95 relative hover:cursor-pointer flex-col pl-3 pr-1 md:px-4  w-[250px] md:h-[350px] transition-transform rounded",
+                "border-2 flex group py-2 md:min-h-[300px] min-h-[180px] overflow-hidden active:scale-95 relative hover:cursor-pointer flex-col pl-3 pr-1 md:px-4  w-[250px] md:h-[350px] transition-transform rounded",
                 props.className
             )}
         >

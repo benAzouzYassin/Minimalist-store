@@ -66,16 +66,16 @@ export default function Page() {
 
     return (
         <section className="pt-10 flex flex-col pb-10 relative min-h-screen">
-            <div className="flex max-w-[1220px] md:flex-row flex-col w-full  md:gap-0 gap-3 mx-auto items-center ">
-                <div className="relative md:w-[350px] px-3   w-full">
+            <div className="md:flex grid grid-cols-2  px-3  max-w-[1220px] md:flex-row flex-col w-full  gap-5  mx-auto items-center ">
+                <div className="relative md:w-[350px] w-full     ">
                     <Input
                         type="text"
                         placeholder="Search..."
-                        className="pl-9 focus-visible:pl-10 md:h-auto h-[50px] transition-all"
+                        className="pl-9 focus-visible:pl-10  text-sm border-foreground-muted  md:h-auto h-[50px] transition-all"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <Search className="absolute top-1/2  left-5 -translate-y-1/2 text-neutral-400" />
+                    <Search className="absolute top-1/2  left-2  -translate-y-1/2 text-neutral-400" />
                 </div>
                 <Select
                     onValueChange={(val) => {
@@ -84,7 +84,7 @@ export default function Page() {
                     }}
                     value={selectedCategory}
                 >
-                    <SelectTrigger className="md:w-[300px]  md:h-auto md:flex hidden h-[50px]  w-full font-medium md:ml-auto">
+                    <SelectTrigger className="md:w-[300px]   md:h-auto flex h-[50px] w-full    font-medium md:ml-auto">
                         {selectedCategory.toUpperCase()}
                     </SelectTrigger>
                     <SelectContent className="font-medium z-[999]">
@@ -104,7 +104,7 @@ export default function Page() {
                 </Select>
             </div>
             <section className="flex gap-4 mt-5">
-                <section className="gap-y-5 gap-x-6 mx-auto px-3 max-w-[1220px] grid sm:grid-cols-2 grid-cols-1 md:grid-cols-3 lg:grid-cols-4 justify-center w-full">
+                <section className="gap-y-5 gap-x-6 mx-auto px-3 max-w-[1220px] grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 justify-center w-full">
                     {isLoading &&
                         Array.from({ length: 20 }).map((_, i) => (
                             <ProductCardSkeleton
