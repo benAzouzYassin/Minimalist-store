@@ -14,9 +14,6 @@ export default async function Page({ params }: Props) {
     try {
         const { data } = await apiBase.get(`/products/${params.id}`);
         const product = populateIsDiscounted(data);
-        posthog?.capture("product_view", {
-            product_id: params.id,
-        });
 
         return (
             <section className="min-h-screen pb-20">

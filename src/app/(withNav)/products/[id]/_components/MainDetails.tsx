@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart } from "iconsax-react";
 import { Minus, Plus } from "lucide-react";
@@ -19,6 +19,12 @@ type Props = {
 };
 
 export default function MainDetails({ product }: Props) {
+    useEffect(() => {
+        posthog?.capture("product_view", {
+            product_id: product.id,
+        });
+    }, [product]);
+
     const router = useRouter();
     const favorites = useFavoritesStore((s) => s.products);
     const setFavorites = useFavoritesStore((s) => s.setProducts);
