@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 export default function Hero() {
     return (
-        <section className="grid md:grid-cols-2 gap-3 lg:h-[600px] w-full ">
-            <div className="grid  gap-3 md:h-[300px] h-[150px] overflow-hidden  lg:gap-0 lg:h-full lg:flex ">
+        <section className="grid md:grid-cols-2 gap-3 overflow-hidden  lg:h-[600px] w-full ">
+            <div className="grid  gap-3 md:h-[300px]   border-2 h-[150px] overflow-hidden  lg:gap-0 lg:h-full lg:flex ">
                 <Link
                     href={"/products/?category=FURNITURE"}
                     className="border-2 w-full relative overflow-hidden  group  "
@@ -14,7 +14,7 @@ export default function Hero() {
                     </p>
                     <Image
                         src={"/assets/hero-images/1.png"}
-                        className="w-full h-full 300 object-cover object-center group-hover:scale-[102%] group-active:scale-100 duration-300 transition-transform"
+                        className="w-full h-full 300 object-cover  object-center group-hover:scale-[102%] group-active:scale-100 duration-300 transition-transform"
                         loading="eager"
                         quality={100}
                         width={500}
