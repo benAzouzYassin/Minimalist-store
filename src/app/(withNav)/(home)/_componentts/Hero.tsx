@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Hero() {
     return (
         <section className="grid md:grid-cols-2 gap-3 overflow-hidden  lg:h-[600px] w-full ">
-            <div className="grid  gap-3 md:h-[300px]   border-2 h-[150px] overflow-hidden  lg:gap-0 lg:h-full lg:flex ">
+            <div className="grid  gap-3 md:h-[300px]    h-[150px] overflow-hidden  lg:gap-0 lg:h-full lg:flex ">
                 <Link
                     href={"/products/?category=FURNITURE"}
                     className="border-2 w-full relative overflow-hidden  group  "
@@ -23,7 +23,7 @@ export default function Hero() {
                     />
                 </Link>
             </div>
-            <div className="lg:grid grid-cols-2 gap-3   ">
+            <div className="lg:grid grid-cols-2 gap-3    ">
                 <Link
                     href={"/products/?category=SKIN CARE"}
                     className="border-2 relative hidden lg:block overflow-hidden group"
