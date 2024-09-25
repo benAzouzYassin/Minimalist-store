@@ -101,7 +101,7 @@ const CountrySelect = ({
                     type="button"
                     variant={"outline"}
                     className={cn(
-                        "flex gap-1 h-full rounded-e-none rounded-s-lg px-3"
+                        "flex gap-1  border-neutral-400/80 h-full rounded-e-none rounded-s-lg px-3"
                     )}
                     disabled={disabled}
                 >

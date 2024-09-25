@@ -38,12 +38,12 @@ export default function Page() {
     }
     return (
         <section className="min-h-screen flex  flex-col items-center">
-            <h1 className="font-bold text-3xl sm:text-4xl md:pt-20 pt-5 text-center">
+            <h1 className="font-bold text-4xl md:pt-20 pt-5 text-center">
                 Checkout
             </h1>
 
-            <section className="max-w-[1000px] mt-12 w-full px-4 sm:px-0 mx-auto">
-                <section className="grid gap-8 sm:gap-16 grid-cols-1 sm:grid-cols-3">
+            <section className="max-w-[1000px] md:mt-12 w-full px-4 sm:px-0 mx-auto">
+                <section className="md:grid hidden gap-8  sm:gap-16 grid-cols-1 sm:grid-cols-3">
                     <div
                         onClick={() => setCurrentStep("verification")}
                         className={cn(
@@ -102,7 +102,7 @@ export default function Page() {
                 </section>
             </section>
 
-            <div className="flex min-h-[100vh] pb-20 transition-all w-full !overflow-x-hidden">
+            <div className=" hidden md:flex min-h-[100vh] pb-20 transition-all w-full !overflow-x-hidden">
                 <div
                     className={cn(
                         "w-full sm:w-[1200px] min-h-[100vh] pb-20 bg-white transition-all duration-500 ease-out absolute left-1/2 transform -translate-x-1/2",
@@ -126,6 +126,9 @@ export default function Page() {
                 >
                     <SecondStep />
                 </div>
+            </div>
+            <div className=" flex md:hidden min-h-[100vh] pb-20 transition-all w-full !overflow-x-hidden">
+                <SecondStep />
             </div>
         </section>
     );
