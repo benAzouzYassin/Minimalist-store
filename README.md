@@ -1,1 +1,2 @@
-# Minimalist shop. ## Preview ![](https://yassinebenazouz.vercel.app/minimal-store.webp)
+# Minimalist shop.
+## Preview ![](https://yassinebenazouz.vercel.app/minimal-store.webp)
